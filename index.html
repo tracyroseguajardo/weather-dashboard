@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./assets/styles.css" />
+
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <div class="search">
+        <h2>Search for a City:</h2>
+    </div>
+
+    <div class="current">
+    </div>
+
+    <div class="forecast">
+        <h3>5-day Forecast</h3>
+        <div class="0"></div>
+        <div class="1"></div>
+        <div class="2"></div>
+        <div class="3"></div>
+        <div class="4"></div>
+    </div>
+
+    
+    <script src="https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}"></script>
+    <script src="./assets/script.js"></script>
+</body>
+</html>

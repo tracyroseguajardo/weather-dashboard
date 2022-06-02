@@ -1,15 +1,15 @@
 /* GLOBAL STYLES */
 
-/* not global styles */
-
+/*HEADER*/
 header {
     text-align: center;
     background-color: darkblue;
     color:antiquewhite;
 }
 
+/* BODY */
 .search {
-    display:inline;
+    display:block;
 }
 
 /* .hidden {

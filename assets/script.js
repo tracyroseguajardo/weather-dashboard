@@ -8,19 +8,6 @@ var historyEl = document.getElementById("searchHistory");
 var currentEl = document.getElementById("current");
 var forecastEL = document.getElementById("forecast");
 
-
-//DECLARED FUNCTIONS
-
-// function citySubmitHandler() {
-//     preventDefault();
-//     var city =  cityEl.value.trim();
-//     console.log(city);
-//     if (city) {
-//         getWeather(city);
-//     } else {
-//         alert("City not found. Please enter a different City");
-//     }
-// };
 function userInput() {
     var city = cityEl.value
 
@@ -61,12 +48,12 @@ function todayWeather(city, current) {
     //elements for the page
     var card = document.createElement("div")
     var cardBody = document.createElement("div")
-    var cardHeader = document.createElement("h5")
+    var cardHeader = document.createElement("h3")
     var tempEl = document.createElement("p")
     var windEl = document.createElement("p")
     var humidityEl = document.createElement("p")
     var uvEl = document.createElement("p")
-// add attributes to elements
+    // add attributes to elements
     card.setAttribute('class', "card")
     cardBody.setAttribute("class", "card-body")
     cardHeader.setAttribute("class", "card-title")
@@ -76,13 +63,16 @@ function todayWeather(city, current) {
     uvEl.setAttribute("class", "card-text")
 
     cardHeader.textContent = city
-    tempEl.textContent = temp
+    tempEl.textContent = "temp: " + temp + "F"
+    windEl.textContent = "wind speed: " + wind + "mph"
+    humidityEl.textContent = "humidity: " + humidity + "%"
+    uvEl.textContent = "uv index: " + uv
 
 
-    cardBody.append(cardHeader, tempEl)
-    card.append(cardBody)
+    cardBody.append(cardHeader, tempEl, windEl,humidityEl, uvEl)
+    card.append(cardBody);
 
-    currentEl.append(card)
+    currentEl.append(card);
 }
 
 

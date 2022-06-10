@@ -17,9 +17,10 @@ header {
 } */
 
 .outlook {
-    width: 125px;
-    height: 125px;
+    width: 175px;
+    height: 175px;
     background-color:cadetblue;
+    margin: 10px;
     padding: 10px;
     display: inline-block;
 

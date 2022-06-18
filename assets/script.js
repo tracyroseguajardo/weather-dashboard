@@ -43,7 +43,12 @@ function todayWeather(city, current) {
     var wind = current.wind_speed
     var humidity = current.humidity
     var uv = current.uvi
-    //elements for the page
+    var iconID = current.weather[0].icon
+    console.log(iconID)
+    var iconURL = "http://openweathermap.org/img/wn/" + iconID + "@2x.png"
+    console.log(iconURL);
+
+    //create elements for the page
     var card = document.createElement("div")
     var cardBody = document.createElement("div")
     var cardHeader = document.createElement("h3")
@@ -51,6 +56,8 @@ function todayWeather(city, current) {
     var windEl = document.createElement("p")
     var humidityEl = document.createElement("p")
     var uvEl = document.createElement("p")
+    var iconEl = document.createElement("img")
+
     // add attributes to elements
     card.setAttribute('class', "card")
     cardBody.setAttribute("class", "card-body")
@@ -59,26 +66,40 @@ function todayWeather(city, current) {
     windEl.setAttribute("class", "card-text")
     humidityEl.setAttribute("class", "card-text")
     uvEl.setAttribute("class", "card-text")
+    iconEl.src= iconURL
     //add text content
     cardHeader.textContent = city
     tempEl.textContent = "temp: " + temp + "F"
     windEl.textContent = "wind speed: " + wind + "mph"
     humidityEl.textContent = "humidity: " + humidity + "%"
     uvEl.textContent = "uv index: " + uv
+    console.log(uv)
+    //function to style uv
+    uvIndicator(uv, uvEl)
     //append elements to parents
-    cardBody.append(cardHeader, tempEl, windEl, humidityEl, uvEl)
+    cardBody.append(cardHeader, iconEl, tempEl, windEl, humidityEl, uvEl)
     card.append(cardBody);
     currentEl.append(card);
+}
+
+function uvIndicator(uv, uvEl) {
+    console.log(uv)
+    if (uv <= 3) {
+        uvEl.setAttribute("style", "background-color: 008000")
+    }
 }
 
 function fiveDay(daily) {
     console.log(daily);
 
-    //create loop to create 5 days of content
+    //create loop to generate 5 days of content
     for (i = 1; i < 6; i++) {
         var dailyTemp = daily[i].temp.day
         var dailyWind = daily[i].humidity
         var dailyHumidity = daily[i].wind_speed
+        var dailyIconID = daily[i].weather[0].icon
+        console.log(dailyIconID)
+        var dailyIconURL = "http://openweathermap.org/img/wn/" + dailyIconID + "@2x.png"
 
         var cardTwo = document.createElement("div")
         var cardBodyTwo = document.createElement("div")
@@ -86,6 +107,7 @@ function fiveDay(daily) {
         var tempElTwo = document.createElement("p")
         var windElTwo = document.createElement("p")
         var humidityElTwo = document.createElement("p")
+        var iconElTwo = document.createElement("img")
 
         cardTwo.setAttribute("class", "outlook")
         cardBodyTwo.setAttribute("class", "card-body")
@@ -93,17 +115,19 @@ function fiveDay(daily) {
         tempElTwo.setAttribute("class", "card-text")
         windElTwo.setAttribute("class", "card-text")
         humidityElTwo.setAttribute("class", "card-text")
+        iconElTwo.src = dailyIconURL
+        iconElTwo.setAttribute("class", "icon")
 
         cardHeaderTwo.textContent = "date goes here"
-        tempElTwo.textContent = "temp: " + dailyTemp + "F"
-        windElTwo.textContent = "wind speed: " + dailyWind + "mph"
-        humidityElTwo.textContent = "humidity: " + dailyHumidity + "%"
+        tempElTwo.textContent = "temp: " + dailyTemp + " F"
+        windElTwo.textContent = "wind speed: " + dailyWind + " mph"
+        humidityElTwo.textContent = "humidity: " + dailyHumidity + " %"
 
-        cardBodyTwo.append(cardHeaderTwo, tempElTwo, windElTwo, humidityElTwo)
+        cardBodyTwo.append(cardHeaderTwo, iconElTwo, tempElTwo, windElTwo, humidityElTwo)
         cardTwo.append(cardBodyTwo);
         forecastEl.append(cardTwo);
     }
-
 }
+
 //EVENT LISTENERS
 searchBtn.addEventListener("click", userInput);

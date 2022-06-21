@@ -1,5 +1,6 @@
 //GLOBAL VARIABLES
 var apiKey = "cbbe6c2ed3050fe64ee8a01d85f6dcac"
+var pastCities = []
 
 //DOM ELEMENTS
 var searchBtn = document.getElementById("searchButton");
@@ -8,9 +9,41 @@ var historyEl = document.getElementById("searchHistory");
 var currentEl = document.getElementById("current");
 var forecastEl = document.getElementById("forecast");
 
+function searchHistory(city) {
+    if (pastCities.indexOf(city) !== -1) {
+        return;
+    }
+    pastCities.push(city);
+    localStorage.setItem("cities", JSON.stringify(pastCities));
+    createButtons()
+}
+
+function createButtons() {
+    historyEl.innerHTML = '';
+    for (var i = pastCities.length - 1; i >= 0; i--) {
+        var cityHistoryBtn = document.createElement("button");
+        cityHistoryBtn.setAttribute("class", "btn");
+        cityHistoryBtn.textContent = pastCities[i];
+        historyEl.append(cityHistoryBtn);
+    }
+
+}
+
+function checkStorage() {
+
+    var existingData = localStorage.getItem("cities")
+    if (existingData) {
+        pastCities = JSON.parse(existingData)
+    }
+    createButtons();
+}
+
+checkStorage()
+
 function userInput() {
     var city = cityEl.value
 
+    searchHistory(city)
     getWeather(city)
 }
 
@@ -37,47 +70,50 @@ function oneCall(lat, lon, city) {
 }
 
 function todayWeather(city, current) {
+    currentEl.innerHTML = " "
     console.log(current)
     // create variables for the content that we need to extract from the current object
-    var temp = current.temp
-    var wind = current.wind_speed
-    var humidity = current.humidity
-    var uv = current.uvi
-    var iconID = current.weather[0].icon
-    console.log(iconID)
-    var iconURL = "http://openweathermap.org/img/wn/" + iconID + "@2x.png"
-    console.log(iconURL);
+    var temp = current.temp;
+    var wind = current.wind_speed;
+    var humidity = current.humidity;
+    var uv = current.uvi;
+    var iconID = current.weather[0].icon;
+    var iconURL = "http://openweathermap.org/img/wn/" + iconID + "@2x.png";
 
     //create elements for the page
-    var card = document.createElement("div")
-    var cardBody = document.createElement("div")
-    var cardHeader = document.createElement("h3")
-    var tempEl = document.createElement("p")
-    var windEl = document.createElement("p")
-    var humidityEl = document.createElement("p")
-    var uvEl = document.createElement("p")
-    var iconEl = document.createElement("img")
+    var card = document.createElement("div");
+    var cardBody = document.createElement("div");
+    var cardHeader = document.createElement("h3");
+    var tempEl = document.createElement("p");
+    var windEl = document.createElement("p");
+    var humidityEl = document.createElement("p");
+    var uvEl = document.createElement("p");
+    var iconEl = document.createElement("img");
+    var today = new Date().toLocaleDateString();
+    console.log(today);
 
     // add attributes to elements
-    card.setAttribute('class', "card")
-    cardBody.setAttribute("class", "card-body")
-    cardHeader.setAttribute("class", "card-title")
-    tempEl.setAttribute("class", "card-text")
-    windEl.setAttribute("class", "card-text")
-    humidityEl.setAttribute("class", "card-text")
-    uvEl.setAttribute("class", "card-text")
-    iconEl.src= iconURL
+    card.setAttribute("class", "today");
+    cardBody.setAttribute("class", "card-body");
+    cardHeader.setAttribute("class", "card-title");
+    tempEl.setAttribute("class", "card-text");
+    windEl.setAttribute("class", "card-text");
+    humidityEl.setAttribute("class", "card-text");
+    uvEl.setAttribute("class", "card-text");
+    iconEl.setAttribute("class", "icon")
+    iconEl.src = iconURL;
     //add text content
-    cardHeader.textContent = city
-    tempEl.textContent = "temp: " + temp + "F"
-    windEl.textContent = "wind speed: " + wind + "mph"
-    humidityEl.textContent = "humidity: " + humidity + "%"
-    uvEl.textContent = "uv index: " + uv
-    console.log(uv)
+    cardHeader.textContent = city + " " + today;
+    cardHeader.append(iconEl);
+    tempEl.textContent = "temp: " + temp + "F";
+    windEl.textContent = "wind speed: " + wind + "mph";
+    humidityEl.textContent = "humidity: " + humidity + "%";
+    uvEl.textContent = "uv index: " + uv;
+    console.log(uv);
     //function to style uv
-    uvIndicator(uv, uvEl)
+    uvIndicator(uv, uvEl);
     //append elements to parents
-    cardBody.append(cardHeader, iconEl, tempEl, windEl, humidityEl, uvEl)
+    cardBody.append(cardHeader, tempEl, windEl, humidityEl, uvEl);
     card.append(cardBody);
     currentEl.append(card);
 }
@@ -90,6 +126,7 @@ function uvIndicator(uv, uvEl) {
 }
 
 function fiveDay(daily) {
+    forecastEl.innerHTML = " "
     console.log(daily);
 
     //create loop to generate 5 days of content
@@ -98,7 +135,6 @@ function fiveDay(daily) {
         var dailyWind = daily[i].humidity
         var dailyHumidity = daily[i].wind_speed
         var dailyIconID = daily[i].weather[0].icon
-        console.log(dailyIconID)
         var dailyIconURL = "http://openweathermap.org/img/wn/" + dailyIconID + "@2x.png"
 
         var cardTwo = document.createElement("div")

@@ -1,4 +1,5 @@
 /* GLOBAL STYLES */
+/* BODY */
 
 /*HEADER*/
 header {
@@ -6,10 +7,22 @@ header {
     background-color: darkblue;
     color:antiquewhite;
 }
+/* MAIN CONTENT */
+main{
+    display: flex;
+}
 
-/* BODY */
 .search {
     display:block;
+}
+#searchHistory{
+    display: flex;
+    flex-direction: column;
+}
+
+.today, #forecast {
+    /* display: flex; */
+    padding-left: 15px ;
 }
 
 .outlook {
@@ -32,4 +45,10 @@ header {
 
 .card-title {
     margin: 10px;
+}
+
+.btn {
+    width: 150px;
+    height: 40px;
+    margin: 15px;
 }

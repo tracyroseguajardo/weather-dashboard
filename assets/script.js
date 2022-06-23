@@ -19,7 +19,7 @@ function searchHistory(city) {
 }
 
 function createButtons() {
-    historyEl.innerHTML = '';
+    historyEl.innerHTML = " ";
     for (var i = pastCities.length - 1; i >= 0; i--) {
         var cityHistoryBtn = document.createElement("button");
         cityHistoryBtn.setAttribute("class", "btn");
@@ -121,8 +121,17 @@ function todayWeather(city, current) {
 function uvIndicator(uv, uvEl) {
     console.log(uv)
     if (uv <= 3) {
-        uvEl.setAttribute("style", "background-color: 008000")
+        uvEl.setAttribute("style", "background-color: green")
+    } else {
+        if (uv <= 6) {
+            uvEl.setAttribute("style", "background-color: yellow");
+        } else {
+            if (uv >= 6.1) {
+                uvEl.setAttribute("style", "background-color: red");
+            }
+        }
     }
+
 }
 
 function fiveDay(daily) {
@@ -154,7 +163,7 @@ function fiveDay(daily) {
         iconElTwo.src = dailyIconURL
         iconElTwo.setAttribute("class", "icon")
 
-        cardHeaderTwo.textContent = "date goes here"
+        cardHeaderTwo.textContent = "date"
         tempElTwo.textContent = "temp: " + dailyTemp + " F"
         windElTwo.textContent = "wind speed: " + dailyWind + " mph"
         humidityElTwo.textContent = "humidity: " + dailyHumidity + " %"

@@ -1,5 +1,9 @@
 /* GLOBAL STYLES */
+
 /* BODY */
+body {
+    background-color:antiquewhite;
+}
 
 /*HEADER*/
 header {
@@ -51,4 +55,8 @@ main{
     width: 150px;
     height: 40px;
     margin: 15px;
+}
+
+.indicator {
+    background-color: chartreuse;
 }

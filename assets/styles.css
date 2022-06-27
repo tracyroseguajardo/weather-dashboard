@@ -24,8 +24,13 @@ main{
     flex-direction: column;
 }
 
+.today {
+    border-style: solid;
+    border-color: grey;
+    margin-left: 25px;
+}
+
 .today, #forecast {
-    /* display: flex; */
     padding-left: 15px ;
 }
 
@@ -59,4 +64,9 @@ main{
 
 .indicator {
     background-color: chartreuse;
+}
+
+.uvIndicator {
+    width: 10px;
+    height: 10px;
 }

@@ -88,6 +88,7 @@ function todayWeather(city, current) {
     var windEl = document.createElement("p");
     var humidityEl = document.createElement("p");
     var uvEl = document.createElement("p");
+    var uvIndicatorEl = document.createElement("span")
     var iconEl = document.createElement("img");
     var today = new Date().toLocaleDateString();
     console.log(today);
@@ -105,29 +106,31 @@ function todayWeather(city, current) {
     //add text content
     cardHeader.textContent = city + " " + today;
     cardHeader.append(iconEl);
-    tempEl.textContent = "temp: " + temp + "F";
-    windEl.textContent = "wind speed: " + wind + "mph";
-    humidityEl.textContent = "humidity: " + humidity + "%";
-    uvEl.textContent = "uv index: " + uv;
+    tempEl.textContent = "temp: " + temp + " °F";
+    windEl.textContent = "wind speed: " + wind + " mph";
+    humidityEl.textContent = "humidity: " + humidity + " %";
+    uvEl.textContent = "uv index: ";
+    uvIndicatorEl.textContent = uv;
     console.log(uv);
     //function to style uv
-    uvIndicator(uv, uvEl);
+    uvIndicator(uv, uvIndicatorEl);
     //append elements to parents
+    uvEl.append(uvIndicatorEl);
     cardBody.append(cardHeader, tempEl, windEl, humidityEl, uvEl);
     card.append(cardBody);
     currentEl.append(card);
 }
 
-function uvIndicator(uv, uvEl) {
+function uvIndicator(uv, uvIndicatorEl) {
     console.log(uv)
     if (uv <= 3) {
-        uvEl.setAttribute("style", "background-color: green")
+        uvIndicatorEl.setAttribute("style", "background-color: green")
     } else {
         if (uv <= 6) {
-            uvEl.setAttribute("style", "background-color: yellow");
+            uvIndicatorEl.setAttribute("style", "background-color: yellow");
         } else {
             if (uv >= 6.1) {
-                uvEl.setAttribute("style", "background-color: red");
+                uvIndicatorEl.setAttribute("style", "background-color: red");
             }
         }
     }
@@ -164,7 +167,7 @@ function fiveDay(daily) {
         iconElTwo.setAttribute("class", "icon")
 
         cardHeaderTwo.textContent = "date"
-        tempElTwo.textContent = "temp: " + dailyTemp + " F"
+        tempElTwo.textContent = "temp: " + dailyTemp + " °F"
         windElTwo.textContent = "wind speed: " + dailyWind + " mph"
         humidityElTwo.textContent = "humidity: " + dailyHumidity + " %"
 

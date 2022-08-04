@@ -148,6 +148,14 @@ function fiveDay(daily) {
         var dailyHumidity = daily[i].wind_speed
         var dailyIconID = daily[i].weather[0].icon
         var dailyIconURL = "http://openweathermap.org/img/wn/" + dailyIconID + "@2x.png"
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + i);
+        console.log(tomorrow);
+
+        // var tomorrowTwo = new Date();
+        // tomorrowTwo.setDate(tomorrowTwo.getDate() + 2);
+        // var tomorrow = new Date();
+        // tomorrow.setDate(tomorrow.getDate() + 1);
 
         var cardTwo = document.createElement("div")
         var cardBodyTwo = document.createElement("div")
@@ -166,7 +174,7 @@ function fiveDay(daily) {
         iconElTwo.src = dailyIconURL
         iconElTwo.setAttribute("class", "icon")
 
-        cardHeaderTwo.textContent = "date"
+        cardHeaderTwo.textContent = tomorrow.toLocaleDateString();
         tempElTwo.textContent = "temp: " + dailyTemp + " °F"
         windElTwo.textContent = "wind speed: " + dailyWind + " mph"
         humidityElTwo.textContent = "humidity: " + dailyHumidity + " %"

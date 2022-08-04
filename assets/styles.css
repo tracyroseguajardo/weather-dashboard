@@ -61,12 +61,3 @@ main{
     height: 40px;
     margin: 15px;
 }
-
-.indicator {
-    background-color: chartreuse;
-}
-
-.uvIndicator {
-    width: 10px;
-    height: 10px;
-}

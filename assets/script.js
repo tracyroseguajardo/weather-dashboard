@@ -23,8 +23,8 @@ function createButtons() {
     for (var i = pastCities.length - 1; i >= 0; i--) {
         var cityHistoryBtn = document.createElement("button");
         cityHistoryBtn.setAttribute("class", "btn");
-        cityHistoryBtn.setAttribute("class", pastCities[i]);
-        cityHistoryBtn.setAttribute("class", [i])
+        // cityHistoryBtn.setAttribute("class", pastCities[i]);
+        // cityHistoryBtn.setAttribute("class", [i])
         cityHistoryBtn.textContent = pastCities[i];
         historyEl.append(cityHistoryBtn);
     }
@@ -104,7 +104,7 @@ function todayWeather(city, current) {
     var windEl = document.createElement("p");
     var humidityEl = document.createElement("p");
     var uvEl = document.createElement("p");
-    var uvIndicatorEl = document.createElement("span")
+    var uvIndicatorEl = document.createElement("div")
     var iconEl = document.createElement("img");
     var today = new Date().toLocaleDateString();
     console.log(today);
@@ -117,17 +117,17 @@ function todayWeather(city, current) {
     windEl.setAttribute("class", "card-text");
     humidityEl.setAttribute("class", "card-text");
     uvEl.setAttribute("class", "card-text");
-    iconEl.setAttribute("class", "icon")
+    uvIndicatorEl.setAttribute("class", "indicator");
+    iconEl.setAttribute("class", "icon");
     iconEl.src = iconURL;
     //add text content
     cardHeader.textContent = city + " " + today;
     cardHeader.append(iconEl);
-    tempEl.textContent = "temp: " + temp + " °F";
-    windEl.textContent = "wind speed: " + wind + " mph";
-    humidityEl.textContent = "humidity: " + humidity + " %";
-    uvEl.textContent = "uv index: ";
+    tempEl.textContent = "Temp: " + temp + " °F";
+    windEl.textContent = "Wind Speed: " + wind + " MPH";
+    humidityEl.textContent = "Humidity: " + humidity + " %";
+    uvEl.textContent = "UV Index: ";
     uvIndicatorEl.textContent = uv;
-    console.log(uv);
     //function to style uv
     uvIndicator(uv, uvIndicatorEl);
     //append elements to parents
@@ -186,9 +186,9 @@ function fiveDay(daily) {
         iconElTwo.setAttribute("class", "icon")
 
         cardHeaderTwo.textContent = tomorrow.toLocaleDateString();
-        tempElTwo.textContent = "temp: " + dailyTemp + " °F"
-        windElTwo.textContent = "wind speed: " + dailyWind + " mph"
-        humidityElTwo.textContent = "humidity: " + dailyHumidity + " %"
+        tempElTwo.textContent = "Temp: " + dailyTemp + " °F"
+        windElTwo.textContent = "Wind Speed: " + dailyWind + " MPH"
+        humidityElTwo.textContent = "Humidity: " + dailyHumidity + " %"
 
         cardBodyTwo.append(cardHeaderTwo, iconElTwo, tempElTwo, windElTwo, humidityElTwo)
         cardTwo.append(cardBodyTwo);

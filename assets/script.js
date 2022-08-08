@@ -51,7 +51,7 @@ function userInput() {
 
 function getWeather(search) {
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + apiKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + search + "&appid=" + apiKey;
     fetch(queryURL).then(function (res) {
         return res.json()
     }).then(function (data) {
@@ -75,7 +75,7 @@ function getWeatherAgain() {
     var recallCity = (event.target.innerHTML);
     console.log(recallCity);
 
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + recallCity + "&appid=" + apiKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + recallCity + "&appid=" + apiKey;
     fetch(queryURL).then(function (res) {
         return res.json()
     }).then(function (data) {

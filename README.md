@@ -19,7 +19,7 @@ This application is run in the browser.
 
 ## Usage
 
-This application utilizes a third party API to call up-to-date and accurate information for nearly any city imaginable. This dynamic database along with the design of the application is very user friends and offers a very intutive experience.
+This application utilizes a third party API to call up-to-date and accurate information for nearly any city imaginable. This dynamic database along with the design of the application is very user friendly and offers an intutive experience.
 
 ## License
   

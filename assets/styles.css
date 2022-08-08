@@ -1,15 +1,20 @@
 /* GLOBAL STYLES */
+:root {
+    --lightneutral: #FAEBD7;
+    --structure: #808080;
+}
 
 /* BODY */
 body {
-    background-color:antiquewhite;
+    background-color: var(--lightneutral);
+    font-family:'Times New Roman', Times, serif;
 }
 
 /*HEADER*/
 header {
     text-align: center;
     background-color: darkblue;
-    color:antiquewhite;
+    color: var(--lightneutral)
 }
 /* MAIN CONTENT */
 main{
@@ -19,6 +24,11 @@ main{
 .search {
     display:block;
 }
+
+#searchButton {
+    background-color: var(--structure);
+}
+
 #searchHistory{
     display: flex;
     flex-direction: column;
@@ -33,7 +43,7 @@ main{
 
 .today {
     border-style: solid;
-    border-color: grey;
+    border-color: var(--structure);
     margin-left: 25px;
 }
 
@@ -55,7 +65,7 @@ main{
 }
 
 .card-text {
-    margin: 10px;
+    margin: 7px;
 }
 
 .icon {
@@ -65,7 +75,7 @@ main{
 
 .indicator {
     display: inline-block;
-    width: 30px;
+    width: 40px;
     text-align: center;
     border-radius: 2px;
 }

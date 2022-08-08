@@ -23,6 +23,8 @@ function createButtons() {
     for (var i = pastCities.length - 1; i >= 0; i--) {
         var cityHistoryBtn = document.createElement("button");
         cityHistoryBtn.setAttribute("class", "btn");
+        cityHistoryBtn.setAttribute("class", pastCities[i]);
+        cityHistoryBtn.setAttribute("class", [i])
         cityHistoryBtn.textContent = pastCities[i];
         historyEl.append(cityHistoryBtn);
     }
@@ -41,7 +43,7 @@ function checkStorage() {
 checkStorage()
 
 function userInput() {
-    var city = cityEl.value
+    var city = cityEl.value;
 
     searchHistory(city)
     getWeather(city)
@@ -66,6 +68,20 @@ function oneCall(lat, lon, city) {
         console.log(data);
         todayWeather(city, data.current);
         fiveDay(data.daily);
+    });
+}
+
+function getWeatherAgain() {
+    var recallCity = (event.target.innerHTML);
+    console.log(recallCity);
+
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + recallCity + "&appid=" + apiKey;
+    fetch(queryURL).then(function (res) {
+        return res.json()
+    }).then(function (data) {
+        oneCall(data.coord.lat, data.coord.lon, data.name)
+    }).catch(function (err) {
+        alert('no city with that name')
     });
 }
 
@@ -152,11 +168,6 @@ function fiveDay(daily) {
         tomorrow.setDate(tomorrow.getDate() + i);
         console.log(tomorrow);
 
-        // var tomorrowTwo = new Date();
-        // tomorrowTwo.setDate(tomorrowTwo.getDate() + 2);
-        // var tomorrow = new Date();
-        // tomorrow.setDate(tomorrow.getDate() + 1);
-
         var cardTwo = document.createElement("div")
         var cardBodyTwo = document.createElement("div")
         var cardHeaderTwo = document.createElement("h3")
@@ -183,7 +194,10 @@ function fiveDay(daily) {
         cardTwo.append(cardBodyTwo);
         forecastEl.append(cardTwo);
     }
+    console.log(pastCities)
+
 }
 
 //EVENT LISTENERS
 searchBtn.addEventListener("click", userInput);
+historyEl.addEventListener("click", getWeatherAgain);
